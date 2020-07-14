@@ -26,7 +26,7 @@ metadata {
 		capability "Water Sensor"
 		capability "Temperature Measurement"
 
-		fingerprint inClusters: "0000,0001,0003,0402,0B02,FC02", outClusters: "0003,0019", manufacturer: "WAXMAN", model: "leakSMART Water Sensor V2", deviceJoinName: "leakSMART Water Sensor"
+		fingerprint inClusters: "0000,0001,0003,0402,0B02,FC02", outClusters: "0003,0019", manufacturer: "WAXMAN", model: "leakSMART Water Sensor V2", deviceJoinName: "leakSMART Water Leak Sensor" //leakSMART Water Sensor
 	}
 
 	tiles(scale: 2) {
@@ -74,7 +74,7 @@ def parse(String description) {
 		map = parseAttrMessage(description)
 	} else if (map.name == "temperature") {
 		if (tempOffset) {
-			map.value = (int) map.value + (int) tempOffset
+			map.value = map.value + tempOffset
 		}
 		map.descriptionText = temperatureScale == 'C' ? "${device.displayName} was ${map.value}°C" : "${device.displayName} was ${map.value}°F"
 		map.translatable = true
